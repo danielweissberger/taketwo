@@ -3,7 +3,7 @@ import { Menu, MenuList, MenuButton, MenuItem } from '@reach/menu-button';
 import {useHistory, useLocation} from 'react-router-dom';
 const axios = require("axios");
 
-const Header = (props) => {
+const Header = () => {
     const history = useHistory();
     const location = useLocation();
     const {user} = location.state || {};
@@ -12,13 +12,6 @@ const Header = (props) => {
         axios.get('http://localhost:5000/api/auth/logout')
                 .then(res => {history.push('/login')})
                 .catch(err => alert('Error loggin out.'))
-    }
-    const emailMissions = () => {
-        axios.get('http://localhost:5000/api/missions/email-missions',)
-        .then(res => {
-            alert(`Successfully emailed you at ${user}`)
-        })
-        .catch(err => alert('Error sending history'))
     }
 
     return (
@@ -38,9 +31,6 @@ const Header = (props) => {
                 <MenuList className='rounded-lg'>
                     <MenuItem onSelect={logOutUser} className='bg-gray-700 hover:bg-gray-600 p-4 rounded-t cursor-pointer'>
                         <span className={'text-white'} >Logout</span>
-                    </MenuItem>
-                    <MenuItem onSelect={emailMissions} className='bg-gray-700 hover:bg-gray-600 p-4 rounded-b cursor-pointer'>
-                        <span className={'text-white'} >Email Mission History</span>
                     </MenuItem>
                 </MenuList>
             </Menu>

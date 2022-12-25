@@ -24,7 +24,7 @@ const Publisher =  (props) => {
 
     return (
 
-            <video className='h-full' ref={videoRef}></video>
+            <video className='h-full object-fill' ref={videoRef}></video>
 
     )
 }

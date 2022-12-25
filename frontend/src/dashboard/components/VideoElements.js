@@ -2,39 +2,38 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '../../shared/components/UIElements/Card.js';
 import Publisher from '../components/Publisher.js'
-import {useGetMediaStream} from '../../shared/components/CustomHooks/MediaStreams.js'
-
+import ControlPanel from './ControlPanel/ControlPanel.js';
 axios.defaults.withCredentials = true;
 
 
-const VideoElements = (props) => {
-    const {setQueue, myConstraints} = props;
+const VideoElements = ({
+    mediaStream,
+    updateStream
+    }) => {
+    console.log(mediaStream?.id, 'MS ID')
+    console.log(updateStream, 'update func')
     const [streamRequested, setStreamRequested] = useState(true)
-    const [myStream, setMyStream] = useState(null)
-    console.log(useGetMediaStream)
-    const [generateStream] = useGetMediaStream()
-
-    console.log(myStream?.id, 'stream id !?!?!')
-    useEffect(()=> {
-        console.log("WE IN HERE!?")
-        setStreamRequested(true)
-    }, [myConstraints])
 
     useEffect(()=> {
         prepareMyStream()
-    }, [streamRequested, myConstraints])
+    }, [])
 
     const prepareMyStream = async() => {
-        if(streamRequested){
-            setMyStream(await generateStream(myConstraints))
+        if(streamRequested && updateStream){
+            updateStream({audio:true, video:true})
             setStreamRequested(false)
         }
     }
 
     return (
+        <>
         <Card>
-            <Publisher mediaStream={myStream}/>
+            <ControlPanel updateStream={updateStream} />
         </Card>
+        <Card className={'h-2/3 w-8/12 m-auto'} >
+            <Publisher mediaStream={mediaStream}/>
+        </Card>
+        </>
     )
 }
 
