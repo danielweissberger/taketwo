@@ -1,5 +1,5 @@
 import React, {createContext, useState} from "react";
-import { useGetMediaStream } from "../../shared/components/CustomHooks/MediaStreams";
+import { useGetMediaStream } from "../shared/CustomHooks/MediaStreams";
 
 export const MediaStreamContext = createContext({});
 

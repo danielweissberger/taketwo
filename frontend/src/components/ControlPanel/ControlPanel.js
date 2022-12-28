@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "react-bootstrap/Dropdown";
-import {useGetLatestUserDevices} from "../../../shared/components/CustomHooks/MediaStreams.js";
-import {setConstraints} from "../../../redux/reducers/videoReducer";
+import {useGetLatestUserDevices} from "../../shared/CustomHooks/MediaStreams.js";
+import {setConstraints} from "../../redux/reducers/videoReducer";
 import * as R from "ramda";
-import { DEVICE_KIND } from "../../../enums/mediaStream.js";
+import { DEVICE_KIND } from "../../enums/mediaStream.js";
 
 const getDeviceDict = ({videoinputs, audioinputs, audiooutputs}) => ({
 	videoinputs: R.indexBy(R.prop("deviceId"), videoinputs),

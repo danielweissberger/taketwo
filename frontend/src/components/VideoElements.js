@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../../shared/components/UIElements/Card.js";
-import Publisher from "../components/Publisher.js";
+import Card from "../shared/components/UIElements/Card.js";
+import Publisher from "./Publisher.js";
 import ControlPanel from "./ControlPanel/ControlPanel.js";
 axios.defaults.withCredentials = true;
 
@@ -9,20 +9,10 @@ const VideoElements = ({
 	mediaStream,
 	updateStream
 }) => {
-	console.log(mediaStream?.id, "MS ID");
-	console.log(updateStream, "update func");
-	const [streamRequested, setStreamRequested] = useState(true);
 
 	useEffect(()=> {
-		prepareMyStream();
+		updateStream({audio:true, video:true});
 	}, []);
-
-	const prepareMyStream = async() => {
-		if(streamRequested && updateStream){
-			updateStream({audio:true, video:true});
-			setStreamRequested(false);
-		}
-	};
 
 	return (
 		<>

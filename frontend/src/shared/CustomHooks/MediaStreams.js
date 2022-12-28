@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
-import {setConstraints} from "../../../redux/reducers/videoReducer";
+import {setConstraints} from "../../redux/reducers/videoReducer";
 
 const buildConstraintsPayload = ({audioinput, videoinput}) => ({
 	audio: {
@@ -14,17 +14,13 @@ const buildConstraintsPayload = ({audioinput, videoinput}) => ({
 const useGetMediaStream = () => {
 	const dispatch = useDispatch();
 	const generateStream = async({ audioinput, videoinput }) => {
-		console.log("REGENERAING");
 		let constraints = buildConstraintsPayload({ audioinput, videoinput });
-		console.log("getting called?!?!", constraints);
 		constraints = constraints? constraints : {audio: true, video: true};
 		const stream =  await navigator.mediaDevices.getUserMedia(constraints);
-		console.log(stream.getTracks(), "track info??");
 		const videoTrack = stream?.getTracks()?.find(track => track.kind === "video");
 		const videoID = videoTrack?.getSettings().deviceId;
 		const audioTrack = stream?.getTracks()?.find(track => track.kind === "audio");
 		const audioID = audioTrack?.getSettings().deviceId;
-		console.log(videoID, audioID, "this!?!?");
 		dispatch(setConstraints({audioinput: audioID, videoinput: videoID}));
 		return stream;
 	};
