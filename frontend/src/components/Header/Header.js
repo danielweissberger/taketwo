@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, MenuList, MenuButton, MenuItem } from "@reach/menu-button";
 import {useHistory, useLocation} from "react-router-dom";
+import { HeaderWrapper } from "./styled";
 const axios = require("axios");
 
 const Header = () => {
@@ -15,7 +16,7 @@ const Header = () => {
 	};
 
 	return (
-		<div className='w-full h-24 p-4 bg-gray-300 flex flex-row justify-between items-center border-b border-gray-800'>
+		<HeaderWrapper>
 			<div className='flex flex-row items-center'>
 				<span className='inline-flex items-center font-blue mr-4 text-indigo-500 font-semibold'>{user}</span>
 			</div>
@@ -34,7 +35,7 @@ const Header = () => {
 					</MenuItem>
 				</MenuList>
 			</Menu>
-		</div>
+		</HeaderWrapper>
 	);
 };
 

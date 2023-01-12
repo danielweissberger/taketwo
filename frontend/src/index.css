@@ -16,7 +16,7 @@ html {
 
 body {
   margin: 0;
-  background-color: #807c7c;
+  background-color: #F7F0F5;
   height: 100%;
   width: 100%;
 }
@@ -26,4 +26,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }

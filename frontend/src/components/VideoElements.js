@@ -1,28 +1,51 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../shared/components/UIElements/Card.js";
+import Card from "../shared/components/UIElements/Card/Card.js";
 import Publisher from "./Publisher.js";
-import ControlPanel from "./ControlPanel/ControlPanel.js";
+import ControlPanel from "./ControlPanel/index.js";
 axios.defaults.withCredentials = true;
 
 const VideoElements = ({
 	mediaStream,
-	updateStream
+	updateStream,
+	currentDevices,
+	refreshDevices,
+	constraints,
+	setConstraints,
+	camOff,
+	toggleCam,
+	micOff,
+	toggleMic,
+	videoTrack,
+	audioTrack,
+	isGeneratingStream,
+	initializeAudioOutput
 }) => {
 
 	useEffect(()=> {
-		updateStream({audio:true, video:true});
+		updateStream({audioinput: true, videoinput: true});
 	}, []);
 
 	return (
-		<>
-			<Card className={"h-2/3 w-8/12 mb-12 mx-auto"}>
-				<ControlPanel updateStream={updateStream} />
+			<Card >
+				<Publisher 
+					mediaStream={mediaStream}
+					videoTrack={videoTrack}
+					audioTrack={audioTrack}
+					isGeneratingStream={isGeneratingStream}
+				/>
+				<ControlPanel 
+					updateStream={updateStream} 
+					currentDevices={currentDevices} 
+					refreshDevices={refreshDevices}
+					constraints={constraints}
+					setConstraints={setConstraints}
+					camOff={camOff}
+					toggleCam={toggleCam}
+					micOff={micOff}
+					toggleMic={toggleMic}
+				/>
 			</Card>
-			<Card className={"h-2/3 w-8/12 m-auto"} >
-				<Publisher mediaStream={mediaStream}/>
-			</Card>
-		</>
 	);
 };
 

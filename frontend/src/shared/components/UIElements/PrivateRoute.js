@@ -1,12 +1,13 @@
 import React from "react";
 import {Route, Redirect, useLocation} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 	const location = useLocation();
-	const {user} = location.state || {};
+	const {isLoggedIn} = useSelector(state => state.user);
 
-	if(!user){
-		return <Redirect to={{pathname:"/login", from:location.pathname}}/>;
+	if(!isLoggedIn){
+		// return <Redirect to={{pathname:"/login", from:location.pathname}}/>;
 	}
 
 	return (

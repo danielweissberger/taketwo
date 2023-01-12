@@ -1,0 +1,1 @@
+export const removeLastUrlPath = (url) => url.slice(0, url.lastIndexOf('/'));

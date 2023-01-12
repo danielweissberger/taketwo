@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import TextInput from "../../shared/components/UIElements/TextInput.js";
 import {useHistory} from "react-router-dom";
+import { setUser } from "../../redux/reducers/userReducer.js";
 
 const axios = require("axios");
 
@@ -10,6 +12,7 @@ const Login = () => {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [validationError, setValidationError] = useState("");
 	const [isSignup, setIsSignup] = useState(false);
+	const dispatch = useDispatch();
 
 	let history = useHistory();
 	// clear validation errors on change
@@ -26,10 +29,8 @@ const Login = () => {
 		axios
 			.post("http://localhost:5000/api/auth/login", data)
 			.then(() => {
-				history.push({
-					pathname: "/",
-					state: {user:email} //not ideal, but I'm avoiding creating a global state for user
-				});
+				dispatch(setUser({email}))
+				history.push("/");
 			})
 			.catch(() => setValidationError("Invalid credentials provided"));
 	};
